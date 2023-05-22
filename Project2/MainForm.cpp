@@ -7,6 +7,6 @@ using namespace System::Windows::Forms;
 void main(array<String^>^ args) {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
-    Project2::MainForm form;
+    MainProject::MainForm form;
     Application::Run(% form);
 }
