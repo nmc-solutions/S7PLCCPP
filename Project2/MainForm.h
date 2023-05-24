@@ -134,6 +134,10 @@ namespace MainProject {
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::TextBox^ textBox2;
+
+
+
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label3;
@@ -142,6 +146,8 @@ namespace MainProject {
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox4;
 	private: System::Windows::Forms::TextBox^ textBox3;
+
+
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::GroupBox^ groupBox2;
 	private: System::Windows::Forms::TextBox^ textBox8;
@@ -409,15 +415,15 @@ private: System::Windows::Forms::Button^ button9;
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(382, 41);
+			this->label6->Location = System::Drawing::Point(402, 41);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(106, 16);
+			this->label6->Size = System::Drawing::Size(86, 16);
 			this->label6->TabIndex = 10;
-			this->label6->Text = L"Water Temp (°C)";
+			this->label6->Text = L"Light Intensity";
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(299, 76);
+			this->textBox4->Location = System::Drawing::Point(325, 76);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->ReadOnly = true;
 			this->textBox4->Size = System::Drawing::Size(58, 22);
@@ -426,7 +432,7 @@ private: System::Windows::Forms::Button^ button9;
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(299, 38);
+			this->textBox3->Location = System::Drawing::Point(325, 38);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(58, 22);
@@ -438,9 +444,9 @@ private: System::Windows::Forms::Button^ button9;
 			this->label5->AutoSize = true;
 			this->label5->Location = System::Drawing::Point(206, 44);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(26, 16);
+			this->label5->Size = System::Drawing::Size(113, 16);
 			this->label5->TabIndex = 7;
-			this->label5->Text = L"PH";
+			this->label5->Text = L"Water Tank Level";
 			// 
 			// textBox2
 			// 
@@ -456,9 +462,9 @@ private: System::Windows::Forms::Button^ button9;
 			this->label4->AutoSize = true;
 			this->label4->Location = System::Drawing::Point(206, 83);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(86, 16);
+			this->label4->Size = System::Drawing::Size(106, 16);
 			this->label4->TabIndex = 5;
-			this->label4->Text = L"Light Intensity";
+			this->label4->Text = L"Water Temp (°C)";
 			// 
 			// textBox1
 			// 
@@ -474,9 +480,10 @@ private: System::Windows::Forms::Button^ button9;
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(6, 82);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(113, 16);
+			this->label3->Size = System::Drawing::Size(26, 16);
 			this->label3->TabIndex = 3;
-			this->label3->Text = L"Water Tank Level";
+			this->label3->Text = L"PH";
+			this->label3->Click += gcnew System::EventHandler(this, &MainForm::label3_Click);
 			// 
 			// groupBox2
 			// 
@@ -1736,16 +1743,16 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 			   ////Base on
 
 			   if (PHValue >= PhUp) {
-				   binaryArraySave[5] = 1;
+				   binaryArraySave[5] = 0;
 				   isBaseOn = true;
-				   binaryArraySave[4] = 0;
+				   binaryArraySave[4] = 1;
 				   isAcidOn = false;
 			   }
 			   ////Acid
 			   if (PHValue <= PhLo) {
-				   binaryArraySave[4] = 1;
+				   binaryArraySave[4] = 0;
 				   isAcidOn = true;
-				   binaryArraySave[5] = 0;
+				   binaryArraySave[5] = 1;
 				   isBaseOn = false;
 			   }
 
@@ -1792,6 +1799,8 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 				RelayConnectArd();
 		   }
 	   }
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
 
@@ -1829,10 +1838,10 @@ void MainProject::MainForm::OnTick(System::Object^ sender, System::EventArgs^ e)
 		std::string getRetString = GetStringUntilCarriageReturn(stringNon);
 		SplitString(getRetString, delimiter, strings, arraySize);
 		String^ ambientT = marshal_as<String^>(strings[0]);
-		String^ waterTankLV = marshal_as<String^>(strings[1]);
-		String^ PH = marshal_as<String^>(strings[2]);
-		String^ lightInten = marshal_as<String^>(strings[3]);
-		String^ waterT = marshal_as<String^>(strings[4]);
+		String^ waterTankLV = marshal_as<String^>(strings[2]);
+		String^ PH = marshal_as<String^>(strings[1]);
+		String^ lightInten = marshal_as<String^>(strings[4]);
+		String^ waterT = marshal_as<String^>(strings[3]);
 		// GetDataPar
 		float::TryParse(this->textBox9->Text, ambientUp);
 		float::TryParse(this->textBox10->Text, ambientLo);
@@ -1870,10 +1879,10 @@ void MainProject::MainForm::OnTick(System::Object^ sender, System::EventArgs^ e)
 			wtTempValue = 0.0;
 		
 		this->textBox1->Text = ambientT;
-		this->textBox2->Text = waterTankLV;
-		this->textBox3->Text = PH;
-		this->textBox4->Text = lightInten;
-		this->textBox5->Text = waterT;
+		this->textBox2->Text = PH; //
+		this->textBox3->Text = waterTankLV;
+		this->textBox4->Text = waterT;
+		this->textBox5->Text = lightInten;
 	}
 	
 }
