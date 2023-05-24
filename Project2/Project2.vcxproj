@@ -75,7 +75,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -87,7 +90,15 @@
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
       <AdditionalLibraryDirectories>$(SolutionDir)\LIB\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AssemblyLinkResource>
+      </AssemblyLinkResource>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)"\LIB\lib\*.DLL "$(TargetDir)" /D /K /Y</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy DLLs to Target Directory</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,6 +135,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\LIB\s7.cpp" />
+    <ClCompile Include="..\LIB\SerialPort.cpp" />
     <ClCompile Include="..\LIB\snap7.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
