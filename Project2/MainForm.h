@@ -1,13 +1,13 @@
 #pragma once
 //#include <snap7.h>
-#include<C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\snap7.h>
+#include<snap7.h>
 #include <cstring>
 #include <compare>
 #include <type_traits>
 #include <string>
 #include <bitset>
-#include <C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\s7.h>
-#include <C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\SerialPort.h>
+#include <s7.h>
+#include <SerialPort.h>
 #include <msclr/marshal_cppstd.h>
 #include <sstream>
 #include <sstream>

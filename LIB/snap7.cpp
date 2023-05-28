@@ -24,11 +24,11 @@
 |  If not, see  http://www.gnu.org/licenses/                                   |
 |==============================================================================|
 |                                                                              |
-|  C++ Snap 7 classes Implementation                                           |
+|  C++ Snap 7 classes Implementation                                            |
 |                                                                              |
 |=============================================================================*/
 
-#include<C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\snap7.h>
+#include<snap7.h>
 
 //==============================================================================
 // CLIENT

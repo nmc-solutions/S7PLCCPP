@@ -10,7 +10,7 @@
 //
 //******************************************************************************************************
 
-#include "C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\s7.h"
+#include "s7.h"
 #include "string.h" // for memcpy
 
 
