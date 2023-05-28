@@ -1,4 +1,4 @@
-#include "C:\Users\Admin\Desktop\doAncpp\S7PLCCPPPack\LIB\include\SNAP7\SerialPort.h"
+#include "SerialPort.h"
 
 SerialPort::SerialPort(char *portName)
 {
